@@ -7,7 +7,7 @@ use clap::Parser;
 /// Yet another screenshot tool.
 
 #[derive(Parser, Debug)]
-#[command(version, about, version = "1.0.0")]
+#[command(version, about, version)]
 struct Args {
     /// If you want save the ss as a file
     #[arg(short, long, value_name = "PATH")]
