@@ -3,9 +3,9 @@ use std::borrow::Cow;
 use arboard::{Clipboard, ImageData, SetExtLinux};
 use xcap::image::{ImageBuffer, Rgba};
 
-pub fn copy(image: ImageBuffer<Rgba<u8>, Vec<u8>>) {
-    let mut ctx = Clipboard::new().unwrap();
-    let mut setter = ctx.set();
+pub fn copy(image: ImageBuffer<Rgba<u8>, Vec<u8>>) -> Result<(), Box<dyn std::error::Error>> {
+    let mut ctx = Clipboard::new()?;
+    let setter = ctx.set();
     let (width, height) = image.dimensions();
     let raw_pixels = image.into_raw();
 
@@ -17,4 +17,6 @@ pub fn copy(image: ImageBuffer<Rgba<u8>, Vec<u8>>) {
             bytes: Cow::from(raw_pixels),
         })
         .unwrap();
+
+    Ok(())
 }
